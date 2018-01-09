@@ -3,6 +3,7 @@
 <head>
 <title>Contact Us</title>
 <link href="styles/style.css" rel="stylesheet" type="text/css" media="screen" />
+<link rel="icon" href="Images/Title Logo.jpg" type="image/gif" sizes="16x16">
 </head>
 <body>
 <div id="container">
@@ -13,7 +14,7 @@
         <li><a href="about.html">About</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="reviews.html">Reviews</a></li>
-        <li><a href="contact.html" class="current">Contact</a></li>
+        <li><a href="contact.php" class="current">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -23,6 +24,18 @@
       <h3>Contact Us</h3>
       <br />
       <p><b><font color="9c5959">Feel free to fill out this and reach out to us:</font></b></p>
+      
+<?php
+mysql_connect("localhost","root","");
+mysql_select_db("lemonmint-db");
+error_reporting(0);
+if(isset($_POST['submit']))
+{
+ $sql = "INSERT INTO contact (name,subject,email,message) VALUES ('".$_POST['name']."','".$_POST['subject']."','".$_POST['email']."','".$_POST['message']."')"; 
+mysql_query($sql);
+}
+?>
+
       <form action="#" method="post">
         <label for="name">Name:</label>
         <br>
@@ -31,20 +44,20 @@
         <br>
         <label for="name">Subject:</label>
         <br>
-        <input type="text" name="name" id="subject" value="" tabindex="1" />
+        <input type="text" name="subject" id="subject" value="" tabindex="1" />
         <br>
         <br>
         <label for="name">Email:</label>
         <br>
-        <input type="text" name="name" id="email" value="" tabindex="1" />
+        <input type="text" name="email" id="email" value="" tabindex="1" />
         <br>
         <br>
         <label for="textarea">Message:</label>
         <br>
-        <textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+        <textarea cols="40" rows="8" name="message" id="textares"></textarea>
         <br>
         <br>
-        <input type="submit" value="Submit" class="button" />
+        <input type="submit" name="submit" value="Submit" class="button" />
       </form>
       <br>
       <br>
