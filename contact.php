@@ -4,6 +4,28 @@
 <title>Contact Us</title>
 <link href="styles/style.css" rel="stylesheet" type="text/css" media="screen" />
 <link rel="icon" href="Images/Title Logo.jpg" type="image/gif" sizes="16x16">
+<script>
+function validateForm() {
+    var nm = document.forms["contactform"]["name"].value;
+	var email=document.forms["contactform"]["email"].value; 
+	var mes=document.forms["contactform"]["message"].value;
+	var atposition=email.indexOf("@");  
+	var dotposition=email.lastIndexOf(".");  
+    if (nm == "") {
+        alert("Name must be filled out");
+        return false; } 
+	else if(email == "") {
+		alert ("Email cannot be left blank");
+		return false;}
+	else if (atposition<1 || dotposition<atposition+2 || dotposition+2>=email.length)
+	{  
+ 	 alert("Please enter a valid e-mail address");  
+  	 return false;  
+  	}
+	else if (mes == "")
+	{alert("Message must have some text");}
+}
+</script>
 </head>
 <body>
 <div id="container">
@@ -36,7 +58,7 @@ mysql_query($sql);
 }
 ?>
 
-      <form action="#" method="post">
+      <form name="contactform" action="#" method="post" onSubmit="return validateForm()">
         <label for="name">Name:</label>
         <br>
 	<input type="text" name="name" id="name" value="" tabindex="1" />
